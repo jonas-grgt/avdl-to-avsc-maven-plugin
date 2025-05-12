@@ -1,0 +1,7 @@
+namespace io.jonasg;
+
+record Person {
+	string name;
+	int age;
+	string? email;
+}
