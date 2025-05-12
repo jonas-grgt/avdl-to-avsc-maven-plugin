@@ -12,6 +12,8 @@
 	<name>avdl-to-avsc-maven-plugin</name>
 	<url>https://github.com/jonasg-grgt/avdl-to-avsc-maven-plugin</url>
 
+	<description>maven plugin to convert AVDL to AVSC</description>
+
 	<developers>
 		<developer>
 			<name>Jonas Geiregat</name>
