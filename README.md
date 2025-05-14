@@ -4,7 +4,7 @@ The Avro IDL language is a much more ergonomic way to define Avro schemas than t
 format.
 Yet the confluent schema registry requires the JSON format.
 
-This plugins allows you to define your schemas in Avro IDL, use them to generate POJO's
+This plugin allows you to define your schemas in Avro IDL, use them to generate POJO's
 with the `avro-maven-plugin` and convert them to JSON format
 so they can be uploaded to the schema registry using the
 `kafka-schema-registry-maven-plugin`.
