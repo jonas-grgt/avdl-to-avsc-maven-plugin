@@ -6,7 +6,7 @@
 
 	<groupId>io.jonasg</groupId>
 	<artifactId>avdl-to-avsc-maven-plugin</artifactId>
-	<version>1.0.1</version>
+	<version>2.0.0</version>
 	<packaging>maven-plugin</packaging>
 
 	<name>avdl-to-avsc-maven-plugin</name>
