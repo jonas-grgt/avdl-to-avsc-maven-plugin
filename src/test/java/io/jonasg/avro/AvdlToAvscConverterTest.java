@@ -28,7 +28,7 @@ class AvdlToAvscConverterTest {
     }
 
     @Test
-    void testConvertWithNonExistentDirectory() {
+    void convertWithNonExistentDirectory() {
         String nonExistentDirectory = "non-existent-dir";
         String outputDirectory = "output-dir";
 
@@ -38,12 +38,26 @@ class AvdlToAvscConverterTest {
     }
 
     @Test
-    void testConvertWithValidAvdlFiles() throws IOException {
+    void convertWithValidAvdlFiles() throws IOException {
         Path tempOutputDir = Files.createTempDirectory("avdl-output");
 
         converter.convert("src/test/resources/avdl-input", tempOutputDir.toString());
 
         verify(log).info(contains("Converted src/test/resources/avdl-input/test.avdl"));
+        assertThat(tempOutputDir.toFile().listFiles())
+                .hasSize(1)
+                .extracting(File::getName)
+                .contains("Person.avsc");
+        tempOutputDir.toFile().delete();
+    }
+
+
+    @Test
+    void mainSchemaOnly() throws IOException {
+        Path tempOutputDir = Files.createTempDirectory("avdl-output");
+
+        converter.convert("src/test/resources/avdl-main-only", tempOutputDir.toString());
+
         assertThat(tempOutputDir.toFile().listFiles())
                 .hasSize(1)
                 .extracting(File::getName)

@@ -15,6 +15,50 @@ so they can be uploaded to the schema registry using the
 `.avsc` files in `avscDirectory`. Every avro record will result as a single `.avsc`
 file.
 
+When one `.avdl` file contains multiple _types_ it will result in multiple `avsc` files, one for each type.
+
+For example:
+
+```avdl
+namespace io.jonasg;
+
+record Person {
+	string name;
+	int age;
+	string? email;
+	Sex sex;
+}
+
+enum Sex {
+	MALE,
+	FEMALE
+}
+```
+
+Will result in two `.avsc` files; `Person.avsc` and `Sex.avsc`. 
+The `Person.avsc` file will be **self-contained** and not depend on `Sex.avsc`.
+
+If you only want one single file you can declare a main schema as such:
+
+```avdl
+namespace io.jonasg;
+
+schema Person;
+
+record Person {
+	string name;
+	int age;
+	string? email;
+	Sex sex;
+}
+
+enum Sex {
+	MALE,
+	FEMALE
+}
+```
+This will only output self-contained `Person.avsc` file.
+
 Add the plugin to your `pom.xml`
 
 ```xml

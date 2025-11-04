@@ -1,8 +1,15 @@
 namespace io.jonasg;
+
 schema Person;
 
 record Person {
 	string name;
 	int age;
 	string? email;
+	Sex sex;
+}
+
+enum Sex {
+	MALE,
+	FEMALE
 }
