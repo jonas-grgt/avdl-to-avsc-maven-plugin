@@ -43,7 +43,7 @@ If you only want one single file you can declare a main schema as such:
 ```avdl
 namespace io.jonasg;
 
-schema Person;
+schema Person; // declares Person as the main schema
 
 record Person {
 	string name;
