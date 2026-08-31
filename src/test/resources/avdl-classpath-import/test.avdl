@@ -1,0 +1,10 @@
+namespace io.jonasg;
+
+schema Person;
+
+import idl "avro/avdl/address.avdl";
+
+record Person {
+	string name;
+	Address address;
+}
