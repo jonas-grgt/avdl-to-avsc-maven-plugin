@@ -149,3 +149,60 @@ The plugin will generate the below AVSC directory structure:
 └── order
     └── Order.avsc
 ```
+
+## Importing AVDL files from a dependency
+
+If you want to share and reuse types across multiple projects, you can package `.avdl`
+files inside a jar and import them from a dependent project's `.avdl` files using
+Avro IDL's `import idl` statement.
+
+Say `Address.avdl` from the earlier example is instead packaged inside a separate
+dependency jar, on the classpath at:
+
+```
+avro/avdl/Address.avdl
+```
+
+```avdl
+namespace io.jonasg;
+
+schema Address;
+
+record Address {
+    string street;
+    string city;
+}
+```
+
+You can import it from `Order.avdl` by referencing its path on the classpath:
+
+```avdl
+namespace io.jonasg;
+
+schema Order;
+
+import idl "avro/avdl/Address.avdl";
+
+record Order {
+    string orderId;
+    Address shippingAddress;
+}
+```
+
+The plugin resolves the import against the project's runtime classpath, so make sure
+the jar containing `Address.avdl` is declared as a dependency of the project running
+the plugin:
+
+```xml
+
+<dependencies>
+    <dependency>
+        <groupId>io.jonasg</groupId>
+        <artifactId>avro-common-types</artifactId>
+        <version>${avro-common-types.version}</version>
+    </dependency>
+</dependencies>
+```
+
+No additional plugin configuration is needed — as long as the dependency jar is on the
+project's classpath, `import idl "..."` resolves the same way it would for a local file.
